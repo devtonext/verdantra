@@ -64,6 +64,7 @@ export default function FieldInput({ field, value, onChange, allValues = {} }) {
           </button>
         )}
       </div>
+      {field.hint && <div className="admin-field-hint">{field.hint}</div>}
 
       {field.type === 'text' || field.type === 'url' || field.type === 'slug' || field.type === 'date' ? (
         <input

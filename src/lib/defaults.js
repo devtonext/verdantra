@@ -137,7 +137,10 @@ export const defaultContent = {
     badge_label: 'newsletter',
     heading: 'Subscribe to our newsletter to get the latest\nupdates on missions projects & initiatives.',
     input_placeholder: 'Email address',
-    button_label: 'Subscribe'
+    button_label: 'Subscribe',
+    menu_col_1_title: 'Navigation',
+    menu_col_2_title: 'Ecological Frontlines',
+    menu_col_3_title: 'Field Expeditions'
   },
 
   contribution_page: {

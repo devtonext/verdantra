@@ -4,6 +4,20 @@ import { useSite } from '../../lib/site.jsx';
 import { PAGES, COLLECTIONS } from '../schema.js';
 import FieldInput from '../fields.jsx';
 
+function groupFieldsSerially(fields = []) {
+  const groups = [];
+  fields.forEach((f) => {
+    const gName = f.group || 'Section Fields';
+    let last = groups[groups.length - 1];
+    if (!last || last.title !== gName) {
+      last = { title: gName, fields: [] };
+      groups.push(last);
+    }
+    last.fields.push(f);
+  });
+  return groups;
+}
+
 export default function PageEditor() {
   const { pageId = 'home' } = useParams();
   const { content, api, reload, addToast } = useSite();
@@ -36,7 +50,7 @@ export default function PageEditor() {
   const handleDiscard = (secKey) => {
     setDrafts((prev) => ({
       ...prev,
-      [secKey]: structuredClone(content?.[secKey] || {})
+      [secKey]: structuredClone(content?.[sec.key] || {})
     }));
     setDirtyKeys((prev) => ({ ...prev, [secKey]: false }));
     addToast('Discarded unsaved section changes.');
@@ -69,9 +83,12 @@ export default function PageEditor() {
         }}
       >
         <div>
-          <h1 style={{ fontSize: 24, fontWeight: 700, marginBottom: 4 }}>{pageConfig.label} Editor</h1>
-          <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', alignItems: 'center', marginTop: 8 }}>
-            <span style={{ fontSize: 12, color: '#636761' }}>Collections on this page:</span>
+          <h1 style={{ fontSize: 24, fontWeight: 700, marginBottom: 4 }}>{pageConfig.label} — Step-by-Step Visual Editor</h1>
+          <p style={{ fontSize: 13, color: '#636761', marginBottom: 8 }}>
+            Fields are grouped in exact top-to-bottom, left-to-right order (Grid 1, Grid 2, Step 1, Step 2…) so you can easily find and edit any text or photo.
+          </p>
+          <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', alignItems: 'center' }}>
+            <span style={{ fontSize: 12, color: '#636761' }}>Repeating lists on this page:</span>
             {pageConfig.collections.length === 0 && (
               <span className="admin-badge">None</span>
             )}
@@ -79,7 +96,7 @@ export default function PageEditor() {
               const colMeta = COLLECTIONS.find((c) => c.table === colName);
               return (
                 <Link key={colName} to={`/admin/collections/${colName}`} className="admin-btn" style={{ padding: '4px 10px', fontSize: 11.5 }}>
-                  🗂 {colMeta?.label || colName} →
+                  🗂 Edit {colMeta?.label || colName} →
                 </Link>
               );
             })}
@@ -94,6 +111,8 @@ export default function PageEditor() {
       {pageConfig.sections.map((sec) => {
         const isDirty = Boolean(dirtyKeys[sec.key]);
         const secData = drafts[sec.key] || {};
+        const serialGroups = groupFieldsSerially(sec.fields);
+
         return (
           <div key={sec.key} className="admin-card">
             <div
@@ -109,7 +128,7 @@ export default function PageEditor() {
             >
               <div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                  <h2 style={{ fontSize: 17, fontWeight: 700 }}>{sec.title}</h2>
+                  <h2 style={{ fontSize: 17.5, fontWeight: 700 }}>{sec.title}</h2>
                   {isDirty && <span className="admin-badge unsaved">Unsaved</span>}
                 </div>
                 <p style={{ fontSize: 12.5, color: '#636761', marginTop: 4 }}>{sec.description}</p>
@@ -135,17 +154,25 @@ export default function PageEditor() {
               </div>
             </div>
 
-            <div className="form-grid-2">
-              {sec.fields.map((field) => (
-                <FieldInput
-                  key={field.name}
-                  field={field}
-                  value={secData[field.name]}
-                  allValues={secData}
-                  onChange={(val) => handleFieldChange(sec.key, field.name, val)}
-                />
-              ))}
-            </div>
+            {serialGroups.map((grp, gIdx) => (
+              <div key={grp.title} className="admin-serial-group">
+                <div className="admin-serial-group-header">
+                  <span className="admin-serial-step-badge">Part {gIdx + 1}</span>
+                  <span className="admin-serial-group-title">{grp.title}</span>
+                </div>
+                <div className="form-grid-2">
+                  {grp.fields.map((field) => (
+                    <FieldInput
+                      key={field.name}
+                      field={field}
+                      value={secData[field.name]}
+                      allValues={secData}
+                      onChange={(val) => handleFieldChange(sec.key, field.name, val)}
+                    />
+                  ))}
+                </div>
+              </div>
+            ))}
           </div>
         );
       })}

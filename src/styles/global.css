@@ -46,8 +46,9 @@ html {
 body {
   min-height: 100vh;
   overflow-x: hidden;
-  background-color: var(--bg-outer);
-  padding: 18px;
+  background-color: var(--bg-page);
+  padding: 0;
+  margin: 0;
 }
 
 img {
@@ -95,17 +96,24 @@ button {
 
 /* Outer Framed Sheet matching the Dribbble/Pinterest Mockup */
 .site-frame {
-  max-width: 1360px;
-  margin: 0 auto;
+  max-width: 100%;
+  width: 100%;
+  margin: 0;
   background: var(--bg-page);
-  border-radius: 34px;
-  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.08);
+  border-radius: 0;
+  box-shadow: none;
   overflow: hidden;
   position: relative;
 }
+.announcement-bar,
+.site-header {
+  border-radius: 0;
+}
 
 .container-inner {
-  padding: 0 26px;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 24px;
 }
 
 /* Scroll Progress Bar */
@@ -2491,4 +2499,122 @@ button {
 .stage-slide.switching-prev {
   opacity: 0;
   transform: translateX(-18px);
+}
+
+
+/* ============================================================================
+   FOOTER NAVIGATION MENUS GRID & BEGINNER-FRIENDLY ADMIN SERIAL GROUPS
+   ============================================================================ */
+.site-footer {
+  border-radius: 28px 28px 0 0;
+}
+
+.footer-newsletter-grid,
+.footer-menus-grid,
+.footer-bottom-bar {
+  max-width: 1392px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.footer-menus-grid {
+  display: grid;
+  grid-template-columns: 1.35fr 1fr 1fr 1.15fr;
+  gap: 28px;
+  padding: 40px 0;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.footer-menu-col-title {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-main);
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+.footer-menu-col-title::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--primary);
+}
+
+.footer-menu-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.footer-menu-link {
+  font-size: 13px;
+  color: var(--text-muted);
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+.footer-menu-link:hover {
+  color: var(--text-main);
+  transform: translateX(3px);
+}
+
+/* Beginner-Friendly Serial Step / Grid Groups in Admin Page Editor */
+.admin-serial-group {
+  background: #F8F9F6;
+  border: 1px solid #E3E6DF;
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 18px;
+}
+.admin-serial-group:last-child {
+  margin-bottom: 0;
+}
+.admin-serial-group-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+  padding-bottom: 10px;
+  border-bottom: 1px dashed #D5D9D0;
+}
+.admin-serial-step-badge {
+  background: var(--primary);
+  color: #121412;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 999px;
+  letter-spacing: 0.02em;
+  flex-shrink: 0;
+}
+.admin-serial-group-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: #121412;
+}
+.admin-field-hint {
+  font-size: 11.5px;
+  color: #6B7068;
+  margin-top: -2px;
+  margin-bottom: 4px;
+  line-height: 1.4;
+}
+
+@media (max-width: 1024px) {
+  .footer-menus-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 768px) {
+  .footer-menus-grid {
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
 }
