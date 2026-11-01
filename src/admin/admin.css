@@ -1,0 +1,225 @@
+/* ============================================================================
+   VERDANTRA — LAZY-LOADED ADMIN DASHBOARD STYLESHEET
+   ============================================================================ */
+
+.admin-shell {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  background: #F4F5F2;
+  color: #121412;
+  font-family: var(--font-sans);
+  margin: -18px;
+}
+
+.admin-sidebar {
+  background: #121412;
+  color: #ffffff;
+  padding: 24px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+.admin-brand {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 8px;
+}
+.admin-brand-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.admin-nav-group-title {
+  font-size: 10.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.45);
+  padding: 0 10px;
+  margin-bottom: 6px;
+}
+
+.admin-nav-list {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.admin-nav-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 9px 12px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.78);
+  transition: all 0.15s ease;
+}
+.admin-nav-link:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+}
+.admin-nav-link.active {
+  background: var(--primary);
+  color: #121412;
+  font-weight: 600;
+}
+
+.admin-main {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.admin-topbar {
+  background: #ffffff;
+  border-bottom: 1px solid #E4E6E1;
+  padding: 14px 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
+.admin-mode-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 5px 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  background: var(--primary);
+  color: #121412;
+}
+
+.admin-content {
+  padding: 28px;
+  max-width: 1180px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.admin-card {
+  background: #ffffff;
+  border: 1px solid #E4E6E1;
+  border-radius: 18px;
+  padding: 24px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.02);
+}
+
+.admin-stat-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+}
+.admin-stat-box {
+  background: #ffffff;
+  border: 1px solid #E4E6E1;
+  border-radius: 16px;
+  padding: 20px;
+}
+.admin-stat-num {
+  font-size: 28px;
+  font-weight: 700;
+  margin-top: 6px;
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+.admin-table th,
+.admin-table td {
+  text-align: left;
+  padding: 12px 14px;
+  border-bottom: 1px solid #EAECE7;
+}
+.admin-table th {
+  font-size: 11.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #6B7068;
+}
+
+.admin-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 15px;
+  border-radius: 10px;
+  font-size: 12.5px;
+  font-weight: 600;
+  border: 1px solid #D5D8D0;
+  background: #ffffff;
+  color: #121412;
+  transition: all 0.15s ease;
+}
+.admin-btn:hover {
+  background: #F3F4F1;
+}
+.admin-btn-primary {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #121412;
+}
+.admin-btn-primary:hover {
+  filter: brightness(0.95);
+}
+.admin-btn-danger {
+  color: #B42318;
+  border-color: #FDA29B;
+}
+.admin-btn-danger:hover {
+  background: #FEF3F2;
+}
+
+.admin-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 9px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 600;
+  background: #F2F4F7;
+  color: #344054;
+}
+.admin-badge.live {
+  background: #DCFAE6;
+  color: #067647;
+}
+.admin-badge.unsaved {
+  background: #FEF0C7;
+  color: #B54708;
+}
+
+@media (max-width: 900px) {
+  .admin-shell {
+    grid-template-columns: 1fr;
+  }
+  .admin-sidebar {
+    height: auto;
+    position: relative;
+  }
+  .admin-stat-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

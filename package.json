@@ -1,0 +1,23 @@
+{
+  "name": "verdantra-climate-template",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Verdantra \u2014 Nature Conservation & Climate Action Multi-Page React + Supabase Template with Lazy-Loaded CMS Dashboard",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "build:sql": "node scripts/build-sql.mjs"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.45.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.26.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.1",
+    "vite": "^5.4.0"
+  }
+}
